@@ -120,7 +120,7 @@ input { font-family: inherit; outline: none; border: none; }
 
 /* ========= COLUMN 1 ========= */
 .col-1 { width: 360px; display: flex; flex-direction: column; gap: 8px; }
-.summary-panel { height: 610px; }
+.summary-panel { height: 680px; }
 .summary-body { padding: 0; flex: 1; overflow: auto; display: flex; flex-direction: column; }
 
 .scenario-toggle {
@@ -339,6 +339,7 @@ input { font-family: inherit; outline: none; border: none; }
 .narrative-list .accent { color: var(--primary); font-weight: 700; }
 .narrative-list .warn { color: var(--status-danger); font-weight: 700; }
 .narrative-list .ok { color: var(--status-success); font-weight: 700; }
+.ok { color: var(--status-success); font-weight: 600; }
 
 /* Two visual groups: 상병-종속 vs 환자-공통 */
 .group {
@@ -1159,6 +1160,18 @@ input { font-family: inherit; outline: none; border: none; }
                   <span class="meta">· 대상포진 <span class="danger-text">미접종</span></span>
                 </div>
               </div>
+
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">검진</span></div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">국가건강검진 <span class="bold-emphasis">26년 대상자</span> · <span class="ok">25.06 수검</span></span>
+                </div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">5대암: 위 <span class="bold-emphasis">25.05</span></span>
+                  <span class="meta">· 대장 <span class="bold-emphasis">24.10</span></span>
+                  <span class="meta">· 폐 <span class="danger-text">미수검</span></span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -1221,6 +1234,18 @@ input { font-family: inherit; outline: none; border: none; }
                   <span class="meta">· 대상포진 <span class="bold-emphasis">23.09</span></span>
                 </div>
               </div>
+
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">검진</span></div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">국가건강검진 <span class="bold-emphasis">26년 대상자</span> · <span class="danger-text">미수검</span></span>
+                </div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">5대암: 위 <span class="bold-emphasis">24.06</span></span>
+                  <span class="meta">· 자궁경부 <span class="bold-emphasis">25.03</span></span>
+                  <span class="meta">· 유방 <span class="bold-emphasis">24.06</span></span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -1281,6 +1306,17 @@ input { font-family: inherit; outline: none; border: none; }
                   <span class="meta">인플루엔자 <span class="bold-emphasis">25.10</span></span>
                   <span class="meta">· 폐렴구균 <span class="bold-emphasis">23.05</span></span>
                   <span class="meta">· 대상포진 <span class="danger-text">미접종</span></span>
+                </div>
+              </div>
+
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">검진</span></div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">국가건강검진 <span class="bold-emphasis">26년 비대상</span> · <span class="ok">25.04 수검</span></span>
+                </div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">5대암: 위 <span class="bold-emphasis">24.10</span></span>
+                  <span class="meta">· 대장 <span class="danger-text">미수검</span></span>
                 </div>
               </div>
             </div>
