@@ -120,7 +120,7 @@ input { font-family: inherit; outline: none; border: none; }
 
 /* ========= COLUMN 1 ========= */
 .col-1 { width: 360px; display: flex; flex-direction: column; gap: 8px; }
-.summary-panel { height: 640px; }
+.summary-panel { height: 580px; }
 .summary-body { padding: 0; flex: 1; overflow: auto; display: flex; flex-direction: column; }
 
 .scenario-toggle {
@@ -325,41 +325,27 @@ input { font-family: inherit; outline: none; border: none; }
 .narrative-text .warn { color: var(--status-danger); font-weight: 700; }
 .narrative-text .ok { color: var(--status-success); font-weight: 700; }
 
-/* Group headers: 상병-종속 vs 환자-공통 */
-.group-header {
-  padding: 6px 12px;
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--navy);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  background: #F3E8FF;
+/* Two visual groups: 상병-종속 vs 환자-공통 */
+.group {
+  border-left: 3px solid transparent;
+  position: relative;
+}
+.group.disease {
+  border-left-color: var(--primary);
+  background: #fff;
+}
+.group.universal {
+  border-left-color: #94A3B8;
+  background: #F8F9FB;
+}
+.group.universal .sum-section {
+  border-bottom-color: #E5E7EB;
+}
+.group.universal .sum-section:last-child {
+  border-bottom: none;
+}
+.group.disease + .group.universal {
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.group-header:first-child { border-top: none; }
-.group-header.universal {
-  background: #EEF2F7;
-  color: #475569;
-}
-.group-header .desc {
-  font-size: 9px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.group-header .marker {
-  display: inline-block;
-  width: 4px; height: 10px;
-  border-radius: 2px;
-  background: var(--primary);
-  margin-right: 6px;
-  vertical-align: middle;
-}
-.group-header.universal .marker {
-  background: #64748B;
 }
 
 .history-panel { flex: 1; }
@@ -1111,55 +1097,49 @@ input { font-family: inherit; outline: none; border: none; }
               </div>
             </div>
 
-            <div class="group-header">
-              <span><span class="marker"></span>상병 관련</span>
-              <span class="desc">선택된 상병 컨텍스트에 매핑</span>
-            </div>
+            <div class="group disease">
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">장기복용약</span><span class="count-pill">30일+</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="name">메트포르민 500mg 2T/day</span><span class="from">22년~</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s1-ramipril"><span class="name">라미프릴 5mg 1T/day</span><span class="link-chip">→ 관찰</span></span><span class="from">21년~</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="name">아토르바스타틴 20mg 1T/day</span><span class="from">22년~</span></div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">장기복용약</span><span class="count-pill">30일+</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="name">메트포르민 500mg 2T/day</span><span class="from">22년~</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s1-ramipril"><span class="name">라미프릴 5mg 1T/day</span><span class="link-chip">→ 관찰</span></span><span class="from">21년~</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="name">아토르바스타틴 20mg 1T/day</span><span class="from">22년~</span></div>
-            </div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
+                <div class="ai-row linked" data-link="s1-ramipril">
+                  <div class="text">기침 관찰 중</div>
+                  <div class="sub"><span class="med-mention">라미프릴</span>ACE 억제제 부작용 의심</div>
+                </div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
-              <div class="ai-row linked" data-link="s1-ramipril">
-                <div class="text">기침 관찰 중</div>
-                <div class="sub"><span class="med-mention">라미프릴</span>ACE 억제제 부작용 의심</div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">검사 추이</span><span class="count-pill">최근 3회 · 24.10</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">HbA1c</span><span class="ref-range">&lt;7.0</span></span><span class="values"><span class="val-high">7.5</span> → <span class="val-high">7.2</span> → <span class="val-normal">6.9</span></span><span class="trend-down">↓</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">LDL</span><span class="ref-range">&lt;100</span></span><span class="values"><span class="val-high">145</span> → <span class="val-high">122</span> → <span class="val-high">108</span></span><span class="trend-down">↓</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">eGFR</span><span class="ref-range">≥60</span></span><span class="values"><span class="val-normal">78</span> → <span class="val-normal">75</span> → <span class="val-normal">72</span></span><span class="trend-down">↓</span></div>
               </div>
             </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">검사 추이</span><span class="count-pill">최근 3회 · 24.10</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">HbA1c</span><span class="ref-range">&lt;7.0</span></span><span class="values"><span class="val-high">7.5</span> → <span class="val-high">7.2</span> → <span class="val-normal">6.9</span></span><span class="trend-down">↓</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">LDL</span><span class="ref-range">&lt;100</span></span><span class="values"><span class="val-high">145</span> → <span class="val-high">122</span> → <span class="val-high">108</span></span><span class="trend-down">↓</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">eGFR</span><span class="ref-range">≥60</span></span><span class="values"><span class="val-normal">78</span> → <span class="val-normal">75</span> → <span class="val-normal">72</span></span><span class="trend-down">↓</span></div>
-            </div>
+            <div class="group universal">
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">Vital 추이</span><span class="count-pill">최근 5회</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BP</span><span class="ref-range">≤130/80</span></span><span class="values"><span class="val-high">145/90</span>→<span class="val-high">140/88</span>→<span class="val-high">138/85</span>→<span class="val-high">135/82</span>→<span class="val-normal">130/80</span></span><span class="trend-down">↓</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BW</span><span class="ref-range">kg</span></span><span class="values"><span class="val-normal">72.4</span> → <span class="val-normal">71.8</span> → <span class="val-normal">71.5</span> → <span class="val-normal">70.9</span> → <span class="val-normal">70.2</span></span><span class="trend-down">↓</span></div>
+              </div>
 
-            <div class="group-header universal">
-              <span><span class="marker"></span>환자 전반</span>
-              <span class="desc">상병과 무관한 공통 항목</span>
-            </div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">처치 / 주사 이력</span></div>
+                <div class="sum-row" style="padding:0"><span class="meta">마지막 처치</span><span class="bold-emphasis">25.02 인플루엔자 IM</span></div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">Vital 추이</span><span class="count-pill">최근 5회</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BP</span><span class="ref-range">≤130/80</span></span><span class="values"><span class="val-high">145/90</span>→<span class="val-high">140/88</span>→<span class="val-high">138/85</span>→<span class="val-high">135/82</span>→<span class="val-normal">130/80</span></span><span class="trend-down">↓</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BW</span><span class="ref-range">kg</span></span><span class="values"><span class="val-normal">72.4</span> → <span class="val-normal">71.8</span> → <span class="val-normal">71.5</span> → <span class="val-normal">70.9</span> → <span class="val-normal">70.2</span></span><span class="trend-down">↓</span></div>
-            </div>
-
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">처치 / 주사 이력</span></div>
-              <div class="sum-row" style="padding:0"><span class="meta">마지막 처치</span><span class="bold-emphasis">25.02 인플루엔자 IM</span></div>
-            </div>
-
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">예방접종</span></div>
-              <div class="sum-row" style="padding:0; flex-wrap: wrap;">
-                <span class="meta">인플루엔자 <span class="bold-emphasis">24.10</span></span>
-                <span class="meta">· 폐렴구균 <span class="bold-emphasis">22.06</span></span>
-                <span class="meta">· 대상포진 <span class="danger-text">미접종</span></span>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">예방접종</span></div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">인플루엔자 <span class="bold-emphasis">24.10</span></span>
+                  <span class="meta">· 폐렴구균 <span class="bold-emphasis">22.06</span></span>
+                  <span class="meta">· 대상포진 <span class="danger-text">미접종</span></span>
+                </div>
               </div>
             </div>
 
@@ -1175,56 +1155,50 @@ input { font-family: inherit; outline: none; border: none; }
               </div>
             </div>
 
-            <div class="group-header">
-              <span><span class="marker"></span>상병 관련</span>
-              <span class="desc">선택된 상병 컨텍스트에 매핑</span>
-            </div>
+            <div class="group disease">
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">장기복용약</span><span class="count-pill">30일+</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="name">레보티록신 50mcg 1T/day</span><span class="from">23년~</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s2-pred"><span class="name">프레드니솔론 5mg → 2.5mg</span><span class="tapering-tag">tapering</span><span class="link-chip">→ 관찰</span></span><span class="from">25.04~</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="name">알렌드로네이트 70mg 1T/wk</span><span class="from">24년~</span></div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">장기복용약</span><span class="count-pill">30일+</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="name">레보티록신 50mcg 1T/day</span><span class="from">23년~</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s2-pred"><span class="name">프레드니솔론 5mg → 2.5mg</span><span class="tapering-tag">tapering</span><span class="link-chip">→ 관찰</span></span><span class="from">25.04~</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="name">알렌드로네이트 70mg 1T/wk</span><span class="from">24년~</span></div>
-            </div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
+                <div class="ai-row linked" data-link="s2-pred">
+                  <div class="text">근위약감 호소</div>
+                  <div class="sub"><span class="med-mention">프레드니솔론</span>스테로이드 부작용 모니터링 중</div>
+                </div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
-              <div class="ai-row linked" data-link="s2-pred">
-                <div class="text">근위약감 호소</div>
-                <div class="sub"><span class="med-mention">프레드니솔론</span>스테로이드 부작용 모니터링 중</div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">검사 추이</span><span class="count-pill">최근 4회 · 25.01</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">TSH</span><span class="ref-range">0.4-4.0</span></span><span class="values"><span class="val-high">8.2</span> → <span class="val-high">5.4</span> → <span class="val-normal">3.8</span> → <span class="val-normal">2.5</span></span><span class="trend-down">↓</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">fT4</span><span class="ref-range">0.8-1.8</span></span><span class="values"><span class="val-normal">0.9</span> → <span class="val-normal">1.1</span> → <span class="val-normal">1.3</span> → <span class="val-normal">1.4</span></span><span class="trend-up">↑</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">ESR</span><span class="ref-range">&lt;20</span></span><span class="values"><span class="val-high">45</span> → <span class="val-high">32</span> → <span class="val-high">22</span> → <span class="val-normal">18</span></span><span class="trend-down">↓</span></div>
               </div>
             </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">검사 추이</span><span class="count-pill">최근 4회 · 25.01</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">TSH</span><span class="ref-range">0.4-4.0</span></span><span class="values"><span class="val-high">8.2</span> → <span class="val-high">5.4</span> → <span class="val-normal">3.8</span> → <span class="val-normal">2.5</span></span><span class="trend-down">↓</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">fT4</span><span class="ref-range">0.8-1.8</span></span><span class="values"><span class="val-normal">0.9</span> → <span class="val-normal">1.1</span> → <span class="val-normal">1.3</span> → <span class="val-normal">1.4</span></span><span class="trend-up">↑</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">ESR</span><span class="ref-range">&lt;20</span></span><span class="values"><span class="val-high">45</span> → <span class="val-high">32</span> → <span class="val-high">22</span> → <span class="val-normal">18</span></span><span class="trend-down">↓</span></div>
-            </div>
+            <div class="group universal">
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">Vital 추이</span><span class="count-pill">최근 5회 · 갑상선<span class="vital-extra-tag">+HR</span></span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BP</span><span class="ref-range">≤130/80</span></span><span class="values"><span class="val-normal">128/78</span>→<span class="val-normal">125/76</span>→<span class="val-normal">122/75</span>→<span class="val-normal">120/74</span>→<span class="val-normal">118/72</span></span><span class="trend-down">↓</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">HR</span><span class="ref-range">60-100</span></span><span class="values"><span class="val-low">58</span> → <span class="val-normal">62</span> → <span class="val-normal">65</span> → <span class="val-normal">68</span> → <span class="val-normal">70</span></span><span class="trend-up">↑</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BW</span><span class="ref-range">kg</span></span><span class="values"><span class="val-normal">56.2</span> → <span class="val-normal">56.5</span> → <span class="val-normal">56.8</span> → <span class="val-normal">57.1</span> → <span class="val-normal">57.4</span></span><span class="trend-up">↑</span></div>
+              </div>
 
-            <div class="group-header universal">
-              <span><span class="marker"></span>환자 전반</span>
-              <span class="desc">상병과 무관한 공통 항목</span>
-            </div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">처치 / 주사 이력</span></div>
+                <div class="sum-row" style="padding:0"><span class="meta">마지막 처치</span><span class="bold-emphasis">25.01 골밀도 측정 (BMD)</span></div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">Vital 추이</span><span class="count-pill">최근 5회 · 갑상선<span class="vital-extra-tag">+HR</span></span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BP</span><span class="ref-range">≤130/80</span></span><span class="values"><span class="val-normal">128/78</span>→<span class="val-normal">125/76</span>→<span class="val-normal">122/75</span>→<span class="val-normal">120/74</span>→<span class="val-normal">118/72</span></span><span class="trend-down">↓</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">HR</span><span class="ref-range">60-100</span></span><span class="values"><span class="val-low">58</span> → <span class="val-normal">62</span> → <span class="val-normal">65</span> → <span class="val-normal">68</span> → <span class="val-normal">70</span></span><span class="trend-up">↑</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BW</span><span class="ref-range">kg</span></span><span class="values"><span class="val-normal">56.2</span> → <span class="val-normal">56.5</span> → <span class="val-normal">56.8</span> → <span class="val-normal">57.1</span> → <span class="val-normal">57.4</span></span><span class="trend-up">↑</span></div>
-            </div>
-
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">처치 / 주사 이력</span></div>
-              <div class="sum-row" style="padding:0"><span class="meta">마지막 처치</span><span class="bold-emphasis">25.01 골밀도 측정 (BMD)</span></div>
-            </div>
-
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">예방접종</span></div>
-              <div class="sum-row" style="padding:0; flex-wrap: wrap;">
-                <span class="meta">인플루엔자 <span class="bold-emphasis">24.11</span></span>
-                <span class="meta">· 폐렴구균 <span class="danger-text">미접종</span></span>
-                <span class="meta">· 대상포진 <span class="bold-emphasis">23.09</span></span>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">예방접종</span></div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">인플루엔자 <span class="bold-emphasis">24.11</span></span>
+                  <span class="meta">· 폐렴구균 <span class="danger-text">미접종</span></span>
+                  <span class="meta">· 대상포진 <span class="bold-emphasis">23.09</span></span>
+                </div>
               </div>
             </div>
 
@@ -1240,55 +1214,49 @@ input { font-family: inherit; outline: none; border: none; }
               </div>
             </div>
 
-            <div class="group-header">
-              <span><span class="marker"></span>상병 관련</span>
-              <span class="desc">선택된 상병 컨텍스트에 매핑</span>
-            </div>
+            <div class="group disease">
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">장기복용약</span><span class="count-pill">최근 용량 변경 3건</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s3-met"><span class="name">메트포르민 500mg → <strong>1000mg</strong> 2T/day</span><span class="dose-up">↑ 증량</span><span class="link-chip">→ 관찰</span></span><span class="from">25.02~</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="name">라미프릴 5mg → <strong>10mg</strong> 1T/day</span><span class="dose-up">↑ 증량</span><span class="from">25.02~</span></div>
+                <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s3-dapa"><span class="name">다파글리플로진 10mg 1T/day</span><span class="added-tag">+ 신규</span><span class="link-chip">→ 관찰</span></span><span class="from">25.02~</span></div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">장기복용약</span><span class="count-pill">최근 용량 변경 3건</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s3-met"><span class="name">메트포르민 500mg → <strong>1000mg</strong> 2T/day</span><span class="dose-up">↑ 증량</span><span class="link-chip">→ 관찰</span></span><span class="from">25.02~</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="name">라미프릴 5mg → <strong>10mg</strong> 1T/day</span><span class="dose-up">↑ 증량</span><span class="from">25.02~</span></div>
-              <div class="sum-row"><span class="dot"></span><span class="linked" data-link="s3-dapa"><span class="name">다파글리플로진 10mg 1T/day</span><span class="added-tag">+ 신규</span><span class="link-chip">→ 관찰</span></span><span class="from">25.02~</span></div>
-            </div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
+                <div class="ai-row linked" data-link="s3-met">
+                  <div class="text">다음·다뇨 호소</div>
+                  <div class="sub"><span class="med-mention">메트포르민 증량</span><span class="med-mention">다파글리플로진 추가</span>후 모니터링 중</div>
+                </div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
-              <div class="ai-row linked" data-link="s3-met">
-                <div class="text">다음·다뇨 호소</div>
-                <div class="sub"><span class="med-mention">메트포르민 증량</span><span class="med-mention">다파글리플로진 추가</span>후 모니터링 중</div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">검사 추이</span><span class="count-pill">최근 3회 · 25.02 · 악화</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">HbA1c</span><span class="ref-range">&lt;7.0</span></span><span class="values"><span class="val-normal">6.9</span> → <span class="val-high">7.4</span> → <span class="val-high">8.2</span></span><span class="trend-up">↑</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">eGFR</span><span class="ref-range">≥60</span></span><span class="values"><span class="val-normal">72</span> → <span class="val-normal">65</span> → <span class="val-low">58</span></span><span class="trend-down">↓</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">Cr</span><span class="ref-range">0.6-1.2</span></span><span class="values"><span class="val-normal">1.1</span> → <span class="val-high">1.3</span> → <span class="val-high">1.4</span></span><span class="trend-up">↑</span></div>
               </div>
             </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">검사 추이</span><span class="count-pill">최근 3회 · 25.02 · 악화</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">HbA1c</span><span class="ref-range">&lt;7.0</span></span><span class="values"><span class="val-normal">6.9</span> → <span class="val-high">7.4</span> → <span class="val-high">8.2</span></span><span class="trend-up">↑</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">eGFR</span><span class="ref-range">≥60</span></span><span class="values"><span class="val-normal">72</span> → <span class="val-normal">65</span> → <span class="val-low">58</span></span><span class="trend-down">↓</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">Cr</span><span class="ref-range">0.6-1.2</span></span><span class="values"><span class="val-normal">1.1</span> → <span class="val-high">1.3</span> → <span class="val-high">1.4</span></span><span class="trend-up">↑</span></div>
-            </div>
+            <div class="group universal">
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">Vital 추이</span><span class="count-pill">최근 5회 · CKD<span class="vital-extra-tag">BW 강조</span></span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BP</span><span class="ref-range">≤130/80</span></span><span class="values"><span class="val-normal">130/80</span>→<span class="val-high">138/85</span>→<span class="val-high">142/88</span>→<span class="val-high">148/92</span>→<span class="val-high">145/90</span></span><span class="trend-up">↑</span></div>
+                <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BW</span><span class="ref-range">kg</span></span><span class="values"><span class="val-normal">68.0</span> → <span class="val-normal">69.5</span> → <span class="val-normal">71.0</span> → <span class="val-normal">72.0</span> → <span class="val-normal">71.5</span></span><span class="trend-up">↑</span></div>
+              </div>
 
-            <div class="group-header universal">
-              <span><span class="marker"></span>환자 전반</span>
-              <span class="desc">상병과 무관한 공통 항목</span>
-            </div>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">처치 / 주사 이력</span></div>
+                <div class="sum-row" style="padding:0"><span class="meta">마지막 처치</span><span class="bold-emphasis">25.04 영양수액 IV</span></div>
+              </div>
 
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">Vital 추이</span><span class="count-pill">최근 5회 · CKD<span class="vital-extra-tag">BW 강조</span></span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BP</span><span class="ref-range">≤130/80</span></span><span class="values"><span class="val-normal">130/80</span>→<span class="val-high">138/85</span>→<span class="val-high">142/88</span>→<span class="val-high">148/92</span>→<span class="val-high">145/90</span></span><span class="trend-up">↑</span></div>
-              <div class="trend-line"><span class="tlabel-group"><span class="tlabel">BW</span><span class="ref-range">kg</span></span><span class="values"><span class="val-normal">68.0</span> → <span class="val-normal">69.5</span> → <span class="val-normal">71.0</span> → <span class="val-normal">72.0</span> → <span class="val-normal">71.5</span></span><span class="trend-up">↑</span></div>
-            </div>
-
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">처치 / 주사 이력</span></div>
-              <div class="sum-row" style="padding:0"><span class="meta">마지막 처치</span><span class="bold-emphasis">25.04 영양수액 IV</span></div>
-            </div>
-
-            <div class="sum-section">
-              <div class="sum-label"><span class="sum-label-left">예방접종</span></div>
-              <div class="sum-row" style="padding:0; flex-wrap: wrap;">
-                <span class="meta">인플루엔자 <span class="bold-emphasis">24.10</span></span>
-                <span class="meta">· 폐렴구균 <span class="bold-emphasis">23.05</span></span>
-                <span class="meta">· 대상포진 <span class="danger-text">미접종</span></span>
+              <div class="sum-section">
+                <div class="sum-label"><span class="sum-label-left">예방접종</span></div>
+                <div class="sum-row" style="padding:0; flex-wrap: wrap;">
+                  <span class="meta">인플루엔자 <span class="bold-emphasis">24.10</span></span>
+                  <span class="meta">· 폐렴구균 <span class="bold-emphasis">23.05</span></span>
+                  <span class="meta">· 대상포진 <span class="danger-text">미접종</span></span>
+                </div>
               </div>
             </div>
 
