@@ -120,7 +120,7 @@ input { font-family: inherit; outline: none; border: none; }
 
 /* ========= COLUMN 1 ========= */
 .col-1 { width: 360px; display: flex; flex-direction: column; gap: 8px; }
-.summary-panel { height: 580px; }
+.summary-panel { height: 610px; }
 .summary-body { padding: 0; flex: 1; overflow: auto; display: flex; flex-direction: column; }
 
 .scenario-toggle {
@@ -315,15 +315,30 @@ input { font-family: inherit; outline: none; border: none; }
   margin-bottom: 4px;
   display: flex; align-items: center; gap: 4px;
 }
-.narrative-text {
-  font-size: 11px;
-  line-height: 1.6;
-  color: var(--text-default);
+.narrative-list {
+  list-style: none;
+  padding: 0; margin: 0;
 }
-.narrative-text strong { color: var(--text-emphasis); font-weight: 700; }
-.narrative-text .accent { color: var(--primary); font-weight: 700; }
-.narrative-text .warn { color: var(--status-danger); font-weight: 700; }
-.narrative-text .ok { color: var(--status-success); font-weight: 700; }
+.narrative-list li {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-default);
+  padding: 2px 0 2px 12px;
+  position: relative;
+}
+.narrative-list li::before {
+  content: '•';
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 12px;
+}
+.narrative-list strong { color: var(--text-emphasis); font-weight: 700; }
+.narrative-list .accent { color: var(--primary); font-weight: 700; }
+.narrative-list .warn { color: var(--status-danger); font-weight: 700; }
+.narrative-list .ok { color: var(--status-success); font-weight: 700; }
 
 /* Two visual groups: 상병-종속 vs 환자-공통 */
 .group {
@@ -1092,9 +1107,12 @@ input { font-family: inherit; outline: none; border: none; }
 
             <div class="narrative-box">
               <div class="narrative-label">📋 한줄 진료 요약</div>
-              <div class="narrative-text">
-                5년째 <strong>고혈압·당뇨</strong> 관리 중. 작년 BP·HbA1c·LDL 모두 상승 추세였으나 <strong>라미프릴 5mg + 메트포르민 500mg 2T</strong> 유지 중 24.10 기준 <span class="ok">BP 130/80, HbA1c 6.9 목표 달성</span>. <span class="warn">라미프릴 기침 부작용 의심</span> → 지속 시 <strong>ARB 전환 검토</strong>.
-              </div>
+              <ul class="narrative-list">
+                <li>5년째 <strong>고혈압·당뇨</strong> 관리 중</li>
+                <li><strong>라미프릴 5mg + 메트포르민 500mg 2T</strong> 유지 (2제요법)</li>
+                <li>24.10 <span class="ok">BP 130/80 · HbA1c 6.9 목표 달성</span></li>
+                <li><span class="warn">라미프릴 기침 부작용 의심</span> → 지속 시 ARB 전환 검토</li>
+              </ul>
             </div>
 
             <div class="group disease">
@@ -1106,7 +1124,7 @@ input { font-family: inherit; outline: none; border: none; }
               </div>
 
               <div class="sum-section">
-                <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
+                <div class="sum-label"><span class="sum-label-left">증상</span></div>
                 <div class="ai-row linked" data-link="s1-ramipril">
                   <div class="text">기침 관찰 중</div>
                   <div class="sub"><span class="med-mention">라미프릴</span>ACE 억제제 부작용 의심</div>
@@ -1150,9 +1168,12 @@ input { font-family: inherit; outline: none; border: none; }
 
             <div class="narrative-box">
               <div class="narrative-label">📋 한줄 진료 요약</div>
-              <div class="narrative-text">
-                23년 <strong>갑상선기능저하증</strong> 진단 → <strong>레보티록신 50mcg</strong> 유지, <span class="ok">TSH 8.2→2.5 정상화</span>. 24년 PMR 진단되어 <strong>25.04부터 프레드니솔론 5→2.5mg tapering 중</strong> (누적 30일). <span class="warn">근위약감 호소</span> → 스테로이드 부작용 vs PMR 재발 감별 필요. 골다공증 예방 <strong>알렌드로네이트 70mg/wk 병용</strong>.
-              </div>
+              <ul class="narrative-list">
+                <li>23년 <strong>갑상선기능저하증</strong> 진단 → <strong>레보티록신 50mcg</strong> 유지, <span class="ok">TSH 8.2→2.5 정상화</span></li>
+                <li>24년 PMR 진단 → <strong>25.04부터 프레드니솔론 5→2.5mg tapering 중</strong> (누적 30일)</li>
+                <li><span class="warn">근위약감 호소</span> → 스테로이드 부작용 vs PMR 재발 감별 필요</li>
+                <li>골다공증 예방 <strong>알렌드로네이트 70mg/wk 병용</strong></li>
+              </ul>
             </div>
 
             <div class="group disease">
@@ -1164,7 +1185,7 @@ input { font-family: inherit; outline: none; border: none; }
               </div>
 
               <div class="sum-section">
-                <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
+                <div class="sum-label"><span class="sum-label-left">증상</span></div>
                 <div class="ai-row linked" data-link="s2-pred">
                   <div class="text">근위약감 호소</div>
                   <div class="sub"><span class="med-mention">프레드니솔론</span>스테로이드 부작용 모니터링 중</div>
@@ -1209,9 +1230,13 @@ input { font-family: inherit; outline: none; border: none; }
 
             <div class="narrative-box">
               <div class="narrative-label">📋 한줄 진료 요약</div>
-              <div class="narrative-text">
-                5년째 <strong>당뇨·고혈압</strong> 관리 중, 24년 <span class="warn">CKD stage 3 신규 진단</span>. 2제요법(메트포르민+라미프릴)인데도 25년 들어 HbA1c·BP 상승 → <strong>25.02월 메트포르민 500→1000mg 증량, 라미프릴 5→10mg 증량, 다파글리플로진 10mg 추가</strong>, 지금 <strong>90일 복용 완</strong>. 목표 <span class="accent">BP &lt;130/80 · HbA1c &lt;7.0</span>, 미달성 시 <strong>인슐린 글라르긴 추가 예정</strong>.
-              </div>
+              <ul class="narrative-list">
+                <li>5년째 <strong>당뇨·고혈압</strong> 관리, 24년 <span class="warn">CKD stage 3 신규 진단</span></li>
+                <li>2제요법(메트포르민+라미프릴)인데도 25년부터 HbA1c·BP 상승</li>
+                <li><strong>25.02 메트포르민 500→1000mg·라미프릴 5→10mg 증량, 다파글리플로진 10mg 추가</strong>, 90일 복용 완</li>
+                <li>목표 <span class="accent">BP &lt;130/80 · HbA1c &lt;7.0</span></li>
+                <li>미달성 시 <strong>인슐린 글라르긴 추가 예정</strong></li>
+              </ul>
             </div>
 
             <div class="group disease">
@@ -1223,7 +1248,7 @@ input { font-family: inherit; outline: none; border: none; }
               </div>
 
               <div class="sum-section">
-                <div class="sum-label"><span class="sum-label-left">관찰 중</span></div>
+                <div class="sum-label"><span class="sum-label-left">증상</span></div>
                 <div class="ai-row linked" data-link="s3-met">
                   <div class="text">다음·다뇨 호소</div>
                   <div class="sub"><span class="med-mention">메트포르민 증량</span><span class="med-mention">다파글리플로진 추가</span>후 모니터링 중</div>
